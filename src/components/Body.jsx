@@ -14,6 +14,8 @@ export default function Body(props) {
   const [reqDesc, setReqDesc] = useState();
   const [reqId, setReqId] = useState();
   const [reqType, setReqType] = useState();
+  const [reqPriority, setReqPriority] = useState();
+  const [reqRisk, setReqRisk] = useState();
 
   const addReqAnalyst = (e) => {
     const { name, value } = e.target;
@@ -48,6 +50,18 @@ export default function Body(props) {
   const changeType = (e) => {
     const { name, value } = e.target;
     setReqType(value);
+    console.log(name, value);
+  };
+
+  const changePriority = (e) => {
+    const { name, value } = e.target;
+    setReqPriority(value);
+    console.log(name, value);
+  };
+
+  const changeRisk = (e) => {
+    const { name, value } = e.target;
+    setReqRisk(value);
     console.log(name, value);
   };
 
@@ -129,6 +143,21 @@ export default function Body(props) {
         signer
       );
       await contract.validate(reqId);
+    }
+  };
+
+  const handleSubmitRefineReq = async (e) => {
+    e.preventDefault();
+    if (typeof window.ethereum !== "undefined") {
+      await requestAccount();
+      const web3Provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await web3Provider.getSigner();
+      const contract = new ethers.Contract(
+        ReqiurementEngineeringContractAddress,
+        ReqiurementEngineering.abi,
+        signer
+      );
+      await contract.refine(reqId, reqDesc, reqPriority, reqType, reqRisk);
     }
   };
 
@@ -294,7 +323,7 @@ export default function Body(props) {
   } else if (props.action === "refine req") {
     return (
       <div className="refine--req--div">
-        <form className="refine--req--form">
+        <form className="refine--req--form" onSubmit={handleSubmitRefineReq}>
           <label className="req--id--label" name="reqId">
             Requirement Id:
           </label>
@@ -322,14 +351,19 @@ export default function Body(props) {
           </select>
 
           <label for="priorityReq">Priority:</label>
-          <select id="priorityReq" name="priorityReq" required>
+          <select
+            id="priorityReq"
+            name="priorityReq"
+            required
+            onChange={changePriority}
+          >
             <option value="high">High</option>
             <option value="meduim">Medium</option>
             <option value="low">Low</option>
           </select>
 
           <label for="riskReq">Risk:</label>
-          <select id="riskReq" name="riskReq" required>
+          <select id="riskReq" name="riskReq" required onChange={changeRisk}>
             <option value="high">High</option>
             <option value="meduim">Medium</option>
             <option value="low">Low</option>
