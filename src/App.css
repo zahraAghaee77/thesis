@@ -1,0 +1,16 @@
+body {
+  background-color: #ebebfe;
+  background-image: url("./images/ether.png");
+  background-size: 8%;
+  background-position: right 0.7rem bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.caption--image {
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  padding-right: 0.8rem;
+  font-size: small;
+  color: #2d295e;
+}

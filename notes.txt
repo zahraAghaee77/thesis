@@ -1,0 +1,20 @@
+deployed at 0xD4185915BD9533575207DCfdEb6FDeF798B095d3
+
+
+
+
+
+
+return (
+    <>
+      {nextPage === "firstPage" && (
+        <div className="buttons">
+          <button>As a Customer</button>
+          <button>As a Requirements Engineering</button>
+          <button>As a Requirements Analyst</button>
+          <button onClick={goToManagerPage}>As a Manager</button>
+        </div>
+      )}{" "}
+      || {nextPage === "managerPage" && <ManagerPage />}
+    </>
+  );

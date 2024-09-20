@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.add--req--form label,
+.add--req--eng--form label,
+.add--req--ana--form label,
+.remove--req--form label,
+.validate--req--form label,
+.verify--req--form label,
+.refine--req--form label {
+  font-weight: 600;
+  color: #441753;
+}
+
+.add--req--form input,
+.add--req--eng--form input,
+.add--req--ana--form input,
+.remove--req--form input,
+.validate--req--form input,
+.verify--req--form input,
+.refine--req--form input {
+  display: block;
+  border-radius: 4px;
+  border: 1px solid #50466e;
+  margin-bottom: 1.5%;
+  margin-top: 0.5%;
+}
+.refine--req--form select {
+  display: block;
+  border-radius: 4px;
+  border: 1px solid #50466e;
+  margin-bottom: 1.5%;
+  margin-top: 0.5%;
+}
+.add--req--form input:hover,
+.add--req--eng--form input:hover,
+.add--req--ana--form input:hover,
+.remove--req--form input:hover,
+.validate--req--form input:hover,
+.verify--req--form input:hover,
+.refine--req--form input:hover,
+.refine--req--form select:hover {
+  box-shadow: 2px 2px 2px 2px rgba(206, 193, 249, 0.7);
+}
+#reName {
+  width: 14rem;
+  height: 1.5rem;
+}
+#reqDescription {
+  width: 14rem;
+  height: 5rem;
+}
+#reqEng,
+#reqAna,
+#reqId {
+  width: 14rem;
+  height: 1.3rem;
+}
+#typeReq,
+#priorityReq,
+#riskReq {
+  width: 10rem;
+  height: 1.3rem;
+}
+
+.add--req--button,
+.add--req--eng--button,
+.add--req--ana--button,
+.remove--req--button,
+.validate--req--button,
+.verify--req--button,
+.refine--req--button {
+  border-radius: 4px;
+  background: linear-gradient(90.41deg, #785484 1.14%, #441753 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 14.3rem;
+  height: 1.9rem;
+  font-weight: 600;
+}
+.add--req--button:hover,
+.add--req--eng--button:hover,
+.add--req--ana--button:hover,
+.remove--req--button:hover,
+.validate--req--button:hover,
+.verify--req--button:hover,
+.refine--req--button:hover {
+  box-shadow: 2px 2px 2px 2px rgba(206, 193, 249, 0.7);
+}
+.refine--req--div {
+  margin-left: 23%;
+  padding-top: 10%;
+}
+.add--req--div {
+  margin-left: 30%;
+  padding-top: 10%;
+}
+.add--req--eng--div,
+.add--req--ana--div,
+.remove--req--div,
+.validate--req--div,
+.verify--req--div {
+  margin-left: 30%;
+  padding-top: 14%;
+}
+
+.add--req--form .req--name--label,
+.add--req--eng--form .req--eng--label,
+.add--req--ana--form .req--ana--label,
+.req--id--label {
+  margin-top: 15%;
+}

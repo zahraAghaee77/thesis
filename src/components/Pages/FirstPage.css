@@ -1,0 +1,27 @@
+.buttons {
+  position: absolute;
+  display: grid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40%;
+  width: 40%;
+}
+.buttons button {
+  width: 35%;
+  height: 3.5rem;
+  background-color: #656295;
+  color: #e7e7e7;
+  font-size: 17px;
+  font-weight: 540;
+  border-radius: 7px;
+  cursor: pointer;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  display: block;
+  margin: auto auto;
+}
+
+.buttons button:hover {
+  box-shadow: 3px 3px 3px 3px rgba(85, 78, 109, 0.7);
+}
