@@ -255,35 +255,23 @@ contract Reqiurement {
         return string(str);
     }
 
-    function seeUsers() public view returns (string memory) {
-        string memory a = toString(creator);
-        a = string.concat("creator: ", a);
-        a = string.concat(a, " --- ");
-        string memory b = toString(requirementEngineer);
-        b = string.concat("Requirement Engineer: ", b);
-        b = string.concat(b, " --- ");
-        string memory c = toString(requirementAnalyst);
-        c = string.concat("Requirement Analyst: ", c);
-        return string.concat(a, b, c);
-    }
-
     function seeReq1() public view returns (string memory) {
         string memory id_str = toString(id);
-        id_str = string.concat("id: ", id_str, " --- ");
+        id_str = string.concat("id: ", id_str, " , ");
 
-        string memory name_str = string.concat("name: ", name, " --- ");
+        string memory name_str = string.concat("name: ", name, " , ");
 
         string memory des_str = string.concat(
             "description: ",
             description,
-            " --- "
+            " , "
         );
 
         string memory validated_str = toString(validated);
-        validated_str = string.concat("validated: ", validated_str, " --- ");
+        validated_str = string.concat("validated: ", validated_str, " , ");
 
         string memory verified_str = toString(verified);
-        verified_str = string.concat("verified: ", verified_str, " --- ");
+        verified_str = string.concat("verified: ", verified_str, " , ");
 
         return
             string.concat(
@@ -297,40 +285,40 @@ contract Reqiurement {
 
     function seeReq2() public view returns (string memory) {
         string memory typeOfIt_str = typeToString();
-        typeOfIt_str = string.concat("type:", typeOfIt_str, " --- ");
+        typeOfIt_str = string.concat("type:", typeOfIt_str, " , ");
 
         string memory priority_str = priorityToString();
-        priority_str = string.concat("priority: ", priority_str, " --- ");
+        priority_str = string.concat("priority: ", priority_str, " , ");
 
         string memory risk_str = riskToString();
-        risk_str = string.concat("risk: ", risk_str, " --- ");
+        risk_str = string.concat("risk: ", risk_str, " , ");
 
         string memory stage_str = stageToString();
-        stage_str = string.concat("stage: ", stage_str, " --- ");
+        stage_str = string.concat("stage: ", stage_str, " , ");
 
         return string.concat(typeOfIt_str, priority_str, risk_str, stage_str);
     }
 
     function seeReq3() public view returns (string memory) {
         string memory creator_str = toString(creator);
-        creator_str = string.concat("creator: ", creator_str, " --- ");
+        creator_str = string.concat("creator: ", creator_str, " , ");
 
         string memory requirementEngineer_str = toString(requirementEngineer);
         requirementEngineer_str = string.concat(
             "requirement engineer: ",
             requirementEngineer_str,
-            " --- "
+            " , "
         );
 
         string memory requirementAnalyst_str = toString(requirementAnalyst);
         requirementAnalyst_str = string.concat(
             "requirement analyst: ",
             requirementAnalyst_str,
-            " --- "
+            " , "
         );
 
         string memory manager_str = toString(manager);
-        manager_str = string.concat("manager: ", manager_str, " --- ");
+        manager_str = string.concat("manager: ", manager_str, " , ");
 
         return
             string.concat(
@@ -521,13 +509,6 @@ contract RequirementEngineering {
         remove(index);
     }
 
-    function seeReqUser(
-        uint256 _reqNumber
-    ) public view returns (string memory) {
-        (uint256 index, ) = indexOf(_reqNumber);
-        return requirements[index].seeUsers();
-    }
-
     function indexOf(uint256 _reqNumber) public view returns (uint256, bool) {
         uint256 length = requirements.length;
         for (uint256 i = 0; i < length; i++) {
@@ -569,5 +550,13 @@ contract RequirementEngineering {
             a = string.concat(a, " ... ", temp);
         }
         return a;
+    }
+
+    function isRequirement(uint _reqNumber) public view returns (bool) {
+        return availableRequirements[_reqNumber];
+    }
+
+    function getNumbersOfReqiurements() public view returns (uint256) {
+        return numbersOfReqiurements;
     }
 }
