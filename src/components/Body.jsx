@@ -5,7 +5,7 @@ import { useState } from "react";
 import ReqiurementEngineering from "../artifacts/contracts/RequirementEngineering.sol/RequirementEngineering.json";
 
 const ReqiurementEngineeringContractAddress =
-  "0xD4185915BD9533575207DCfdEb6FDeF798B095d3";
+  "0xbc7cd1f1f5e77a7042fc6034e8e3818c60eb5900";
 
 export default function Body(props) {
   const [reqiurementEngineer, setReqiurementEngineer] = useState();

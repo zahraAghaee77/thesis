@@ -81,7 +81,7 @@ function App() {
         ReqiurementEngineering.abi,
         signer
       );
-
+      console.log(signer.address);
       if (await contract.isRequirementEngineer(signer.address)) {
         console.log("you did it.");
         setNextPage("engineerPage");
