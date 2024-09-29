@@ -1,11 +1,13 @@
 import React from "react";
 import "./Body.css";
 import { ethers, BrowserProvider } from "ethers";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReqiurementEngineering from "../artifacts/contracts/RequirementEngineering.sol/RequirementEngineering.json";
 
 const ReqiurementEngineeringContractAddress =
-  "0xbc7cd1f1f5e77a7042fc6034e8e3818c60eb5900";
+  "0x5A6fDc20B1C0dAA5a21aC904a4cA238e43DAf757";
+
+import BigNumber from "bignumber.js";
 
 export default function Body(props) {
   const [reqiurementEngineer, setReqiurementEngineer] = useState();
@@ -16,6 +18,47 @@ export default function Body(props) {
   const [reqType, setReqType] = useState();
   const [reqPriority, setReqPriority] = useState();
   const [reqRisk, setReqRisk] = useState();
+  const [reqiurements, setReqiurement] = useState([]);
+  const [reqss, setReqss] = useState();
+  var reqs = [];
+
+  useEffect(() => {
+    async function fetchData() {
+      if (typeof window.ethereum !== "undefined") {
+        await requestAccount();
+        const web3Provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await web3Provider.getSigner();
+        const contract = new ethers.Contract(
+          ReqiurementEngineeringContractAddress,
+          ReqiurementEngineering.abi,
+          signer
+        );
+        const allReqs = await contract.seeAllReq();
+        setReqss(allReqs);
+
+        /*const countsBigNumber = await contract.getNumbersOfReqiurements();
+        const uint256Value = new BigNumber(countsBigNumber);
+        const counts = uint256Value.toNumber();
+        //console.log(uint256Value.toString());
+        //console.log(counts);
+
+        for (let reqNumber = 0; reqNumber < counts; reqNumber++) {
+          if (await contract.isRequirement(reqNumber)) {
+            //console.log("hiiiii");
+
+            var req1 = await contract.seeReq(reqNumber);
+            const req = req1.substr(0, req1.length - 3);
+            const a = createObj(req);
+            //setReqiurement([...reqiurements, a]);
+            setReqiurement([...reqiurements, a]);
+            console.log(reqs, "ffffffffffffffffffff");
+            //reqs.push(createObj(req));
+          }
+        }*/
+      }
+    }
+    fetchData();
+  }, []);
 
   const addReqAnalyst = (e) => {
     const { name, value } = e.target;
@@ -43,26 +86,50 @@ export default function Body(props) {
 
   const changeReqId = (e) => {
     const { name, value } = e.target;
-    setReqId(value);
-    console.log(name, value);
+    const uint256Value = BigInt(value);
+    setReqId(uint256Value);
+    console.log(uint256Value, value, name);
   };
 
   const changeType = (e) => {
     const { name, value } = e.target;
-    setReqType(value);
-    console.log(name, value);
+
+    var t;
+    if (value === "functional") {
+      t = 0;
+    } else {
+      t = 1;
+    }
+    setReqType(t);
+    console.log(name, value, t);
   };
 
   const changePriority = (e) => {
     const { name, value } = e.target;
-    setReqPriority(value);
-    console.log(name, value);
+    var p;
+    if (value === "low") {
+      p = 0;
+    } else if (value === "meduim") {
+      p = 1;
+    } else {
+      p = 2;
+    }
+    setReqPriority(p);
+    console.log(name, value, p);
   };
 
   const changeRisk = (e) => {
     const { name, value } = e.target;
-    setReqRisk(value);
-    console.log(name, value);
+    var r;
+    if (value === "low") {
+      r = 0;
+    } else if (value === "meduim") {
+      r = 1;
+    } else {
+      r = 2;
+    }
+    setReqRisk(r);
+    console.log(name, value, r);
   };
 
   const requestAccount = async () => {
@@ -157,6 +224,7 @@ export default function Body(props) {
         ReqiurementEngineering.abi,
         signer
       );
+      console.log(reqPriority, reqType, reqRisk);
       await contract.refine(reqId, reqDesc, reqPriority, reqType, reqRisk);
     }
   };
@@ -174,6 +242,86 @@ export default function Body(props) {
       );
       await contract.verify(reqId);
     }
+  };
+
+  const readReqs = async () => {
+    if (typeof window.ethereum !== "undefined") {
+      await requestAccount();
+      const web3Provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await web3Provider.getSigner();
+      const contract = new ethers.Contract(
+        ReqiurementEngineeringContractAddress,
+        ReqiurementEngineering.abi,
+        signer
+      );
+      const countsBigNumber = await contract.getNumbersOfReqiurements();
+      const uint256Value = new BigNumber(countsBigNumber);
+      const counts = uint256Value.toNumber();
+      //console.log(uint256Value.toString());
+      //console.log(counts);
+
+      for (let reqNumber = 0; reqNumber < counts; reqNumber++) {
+        if (await contract.isRequirement(reqNumber)) {
+          //console.log("hiiiii");
+
+          var req1 = await contract.seeReq(reqNumber);
+          const req = req1.substr(0, req1.length - 3);
+          const a = createObj(req);
+          //setReqiurement([...reqiurements, a]);
+          reqs.push(a);
+          console.log(reqs, "ffffffffffffffffffff");
+          //reqs.push(createObj(req));
+        }
+      }
+      //const headers = Object.keys(reqs[0]);
+      //const rows = reqs.map((item) => Object.values(item));
+
+      /*<div className="see--req--div">
+          <table>
+            <thead>
+              <tr>
+                {headers.map((header) => (
+                  <th key={header}>{capitalize(header)}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr key={index}>
+                  {row.map((cell, index) => (
+                    <td key={index}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>*/
+
+      //console.log(reqs.length);
+    }
+  };
+
+  const createObj = (params) => {
+    var items = params.split(" , ");
+    var jsonStrig = "{";
+    for (var i = 0; i < items.length; i++) {
+      var current = items[i].split(": ");
+      jsonStrig += '"' + current[0] + '":"' + current[1] + '",';
+    }
+    jsonStrig = jsonStrig.substr(0, jsonStrig.length - 1);
+    jsonStrig += "}";
+    var obj = JSON.parse(jsonStrig);
+    //console.log(obj);
+    return obj;
+  };
+
+  const seprateReqs = (params) => {
+    var items = params.split(" ... ");
+  };
+
+  const capitalize = (word) => {
+    //console.log(word);
+    return word[0].toUpperCase() + word.slice(1);
   };
 
   if (props.action === "add req") {
@@ -201,27 +349,46 @@ export default function Body(props) {
       </div>
     );
   } else if (props.action === "see req") {
+    /*var items = reqss.split(" ... ");
+    const rqs = [];
+    for (let index = 0; index < items.length; index++) {
+      const element = items[index];
+      const rq = createObj(element);
+      rqs.push(rq);
+    }*/
+    return (
+      <div className="see--req--div">
+        <p>{reqss}</p>
+      </div>
+    );
+
+    /*
+    console.log(reqiurements.length, "hhhhhhhhhh");
+    const headers = Object.keys(reqiurements[0]);
+    const rows = reqiurements.map((item) => Object.values(item));
+
     return (
       <div className="see--req--div">
         <table>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Creator</th>
-            <th>Requirement Engineer</th>
-            <th>Requirement Analyst</th>
-            <th>Manager</th>
-            <th>Verified</th>
-            <th>Validated</th>
-            <th>Type</th>
-            <th>Priority</th>
-            <th>Risk</th>
-            <th>Stage</th>
-          </tr>
+          <thead>
+            <tr>
+              {headers.map((header) => (
+                <th key={header}>{capitalize(header)}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, index) => (
+              <tr key={index}>
+                {row.map((cell, index) => (
+                  <td key={index}>{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
-    );
+    );*/
   } else if (props.action === "add req eng") {
     return (
       <div className="add--req--eng--div">

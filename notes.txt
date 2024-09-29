@@ -11,3 +11,23 @@ Address:
   req ana 1: 0x995286550E9CbC518a593d6e9cBf8064Aa3EfD15
   req ana 2: 0x7653922DD3B02Bf42877Bd984A5a98aB723A223f
   req ana 3: 0x72462B37276b06b0c83bd37F9751e6fF4eE7B5e9
+
+
+
+  requirements:
+    name: Automatic ticket booking
+    description: The customer can reserve a ticket for any time in the future by charging his wallet.
+    risk: Medium
+    priority: Medium
+    type: Functional
+    validated: true
+    verified: true
+
+
+    name: Increase speed of buying a ticket
+    description: Reduce the response time to customer purchases.
+    risk: Medium
+    priority: High
+    type: Non Functional
+    validated: true
+    verified: true

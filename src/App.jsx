@@ -11,7 +11,7 @@ import RequirementEngineerPage from "./components/Pages/RequirementEngineer/Requ
 import RequirementAnalystPage from "./components/Pages/RequirementAnalyst/RequirementAnalystPage";
 
 const ReqiurementEngineeringContractAddress =
-  "0xbc7cd1f1f5e77a7042fc6034e8e3818c60eb5900";
+  "0x5A6fDc20B1C0dAA5a21aC904a4cA238e43DAf757";
 
 function App() {
   const [nextPage, setNextPage] = useState("firstPage");

@@ -285,7 +285,7 @@ contract Reqiurement {
 
     function seeReq2() public view returns (string memory) {
         string memory typeOfIt_str = typeToString();
-        typeOfIt_str = string.concat("type:", typeOfIt_str, " , ");
+        typeOfIt_str = string.concat("type: ", typeOfIt_str, " , ");
 
         string memory priority_str = priorityToString();
         priority_str = string.concat("priority: ", priority_str, " , ");
